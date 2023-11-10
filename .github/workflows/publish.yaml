@@ -4,56 +4,7 @@ on:
   push:
     branches:
       - main
-
-jobs:
-  lint:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [18]
-    steps:
-      - uses: actions/checkout@v3
-      - name: Install pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 8.9.0
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-          registry-url: https://npm.pkg.github.com/
-          cache: 'pnpm'
-      - name: Install dependencies
-        run: pnpm install
-      - name: Check eslint
-        run: pnpm eslint .
-
-  lint:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [18]
-    steps:
-      - uses: actions/checkout@v3
-      - name: Install pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 8.9.0
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-          registry-url: https://npm.pkg.github.com/
-          cache: 'pnpm'
-      - name: Install dependencies
-        run: pnpm install
-        name: Publish extensions
-
-on:
-  push:
-    branches:
-      - main
-
+      
 jobs:
   lint:
     runs-on: ubuntu-latest
