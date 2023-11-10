@@ -27,5 +27,6 @@
 	},
 	"dependencies": {
 		"@directus/errors": "^0.2.0"
-	}
+	},
+	"repository": "git@github.com:Marje3PSUT/psutarchive-directus-extensions.git"
 }

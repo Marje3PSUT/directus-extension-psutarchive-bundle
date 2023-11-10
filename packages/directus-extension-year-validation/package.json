@@ -26,5 +26,7 @@
 		"@types/node": "^20.8.10",
 		"typescript": "^5.2.2"
 	},
-	"dependencies": {}
+	"dependencies": {},
+	"repository": "git@github.com:Marje3PSUT/psutarchive-directus-extensions.git"
+
 }
