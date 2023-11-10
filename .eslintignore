@@ -1,3 +1,37 @@
-packages/**/dist
-*.yml
-*.yaml
+# User preferences
+.DS_Store
+
+# Dependencies
+**/node_modules/
+
+# Logs
+npm-debug.log
+debug
+.clinic
+
+# IDEs / Editors
+.devcontainer/
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.code-workspace
+.history/
+*.sublime-settings
+.*.swp
+
+# Directus
+**/dist
+
+# Misc
+.husky
+.editorconfig
+.eslintignore
+.prettierignore
+**/.gitignore
+.npmrc
+README.md
+**/*.yaml
+**/*.yml
+**/package.json
+**/pnpm-lock.yaml
+

@@ -4,7 +4,6 @@
 # Dependencies
 **/node_modules/
 
-
 # Logs
 npm-debug.log
 debug
@@ -22,6 +21,17 @@ debug
 
 # Directus
 **/dist
-**/package.json
 
+# Misc
+.husky
+.editorconfig
+.eslintignore
+.prettierignore
+**/.gitignore
+.npmrc
+README.md
+**/*.yaml
+**/*.yml
+**/package.json
 **/pnpm-lock.yaml
+
