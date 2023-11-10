@@ -1,5 +1,5 @@
 {
-	"name": "directus-extension-year-validation",
+	"name": "@Marje3PSUT/directus-extension-year-validation",
 	"description": "This hook validates the year field in the resource collection to ensure that it's less than or equal to the current year.",
 	"icon": "extension",
 	"version": "1.0.0",
