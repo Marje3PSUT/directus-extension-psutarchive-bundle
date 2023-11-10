@@ -1,0 +1,30 @@
+{
+	"name": "directus-extension-year-validation",
+	"description": "This hook validates the year field in the resource collection to ensure that it's less than or equal to the current year.",
+	"icon": "extension",
+	"version": "1.0.0",
+	"keywords": [
+		"directus",
+		"directus-extension",
+		"directus-custom-hook"
+	],
+	"type": "module",
+	"directus:extension": {
+		"type": "hook",
+		"path": "dist/index.js",
+		"source": "src/index.ts",
+		"host": "^10.1.14"
+	},
+	"scripts": {
+		"build": "directus-extension build",
+		"dev": "directus-extension build -w --no-minify",
+		"link": "directus-extension link"
+	},
+	"devDependencies": {
+		"@directus/errors": "^0.2.0",
+		"@directus/extensions-sdk": "10.1.14",
+		"@types/node": "^20.8.10",
+		"typescript": "^5.2.2"
+	},
+	"dependencies": {}
+}
