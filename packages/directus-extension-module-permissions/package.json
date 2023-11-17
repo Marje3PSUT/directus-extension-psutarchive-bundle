@@ -2,7 +2,7 @@
 	"name": "@Marje3PSUT/directus-extension-module-permissions",
 	"description": "Please enter a description for your extension",
 	"icon": "extension",
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"keywords": [
 		"directus",
 		"directus-extension",
@@ -24,5 +24,6 @@
 		"@directus/extensions-sdk": "10.1.14",
 		"@types/node": "^20.9.0",
 		"typescript": "^5.2.2"
-	}
+	},
+	"repository": "git@github.com:Marje3PSUT/psutarchive-directus-extensions.git"
 }
