@@ -1,5 +1,5 @@
 {
-	"*.ts": ["pnpm eslint --fix --max-warnings=0 --no-warn-ignored", "pnpm prettier --write"],
-	"*.js": ["pnpm eslint --fix --max-warnings=0 --no-warn-ignored", "pnpm prettier --write"]
+	"*.ts": ["pnpm eslint --fix", "pnpm prettier --write"],
+	"*.js": ["pnpm eslint --fix", "pnpm prettier --write"]
 
 }
