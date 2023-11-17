@@ -2,7 +2,7 @@
 	"name": "@Marje3PSUT/directus-extension-delete-unused-files",
 	"description": "This hook deletes all files that aren't associated with a resource entity (contained within the resource_files folder) every day at 3 AM",
 	"icon": "extension",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"keywords": [
 		"directus",
 		"directus-extension",
