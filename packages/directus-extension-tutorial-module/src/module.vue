@@ -245,7 +245,7 @@ v-for="(item, index) in Object.keys(faqFiltered)" :key="item"
 	float: right;
 }
 
-.faq-item[open]>.faq-question>.arrow {
+.active .arrow {
 	transform: rotate(90deg)
 }
 
