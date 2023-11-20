@@ -252,6 +252,7 @@ v-for="(item, index) in Object.keys(faqFiltered)" :key="item"
 .accordion-drawer {
 	padding: 20px 20px 20px 20px;
 	background-color: lightgray;
+	color: black;
 }
 
 .content-container {
