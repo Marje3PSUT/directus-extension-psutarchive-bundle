@@ -2,7 +2,7 @@
 	"name": "@Marje3PSUT/directus-extension-module-permissions",
 	"description": "This hook ensures that the files module only shows up for admins.",
 	"icon": "extension",
-	"version": "1.0.5",
+	"version": "1.0.6",
 	"keywords": [
 		"directus",
 		"directus-extension",
