@@ -1,6 +1,6 @@
 {
 	"name": "@Marje3PSUT/directus-extension-module-permissions",
-	"description": "Please enter a description for your extension",
+	"description": "This hook ensures that the files module only shows up for admins.",
 	"icon": "extension",
 	"version": "1.0.5",
 	"keywords": [

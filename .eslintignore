@@ -35,3 +35,6 @@ README.md
 **/package.json
 **/pnpm-lock.yaml
 
+# Tutorial module
+packages/directus-extension-tutorial-module/src/shims.d.ts
+
