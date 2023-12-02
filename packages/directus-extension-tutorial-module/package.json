@@ -2,7 +2,7 @@
 	"name": "@Marje3PSUT/directus-extension-tutorial-module",
 	"description": "A module that shows helpful messages depending on the role of the user.",
 	"icon": "extension",
-	"version": "1.0.7",
+	"version": "1.0.8",
 	"keywords": [
 		"directus",
 		"directus-extension",

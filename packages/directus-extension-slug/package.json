@@ -1,6 +1,6 @@
 {
-	"name": "@Marje3PSUT/directus-extension-delete-unused-files",
-	"description": "This hook deletes all files that aren't associated with a resource entity (contained within the resource_files folder) every day at 3 AM",
+	"name": "@Marje3PSUT/directus-extension-slug",
+	"description": "This hook adds a slug field to the specified collections after each save and update.",
 	"icon": "extension",
 	"version": "1.0.8",
 	"keywords": [
@@ -21,9 +21,13 @@
 		"link": "directus-extension link"
 	},
 	"devDependencies": {
+		"@directus/errors": "^0.2.0",
 		"@directus/extensions-sdk": "10.1.14",
 		"@types/node": "^20.8.10",
 		"typescript": "^5.2.2"
+	},
+	"dependencies": {
+		"@sindresorhus/slugify": "^2.2.1"
 	},
 	"repository": "git@github.com:Marje3PSUT/psutarchive-directus-extensions.git"
 }
