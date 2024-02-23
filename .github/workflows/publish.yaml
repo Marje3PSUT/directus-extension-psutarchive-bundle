@@ -27,7 +27,7 @@ jobs:
     strategy:
       matrix:
         node-version: [18]
-#        package: ${{ fromJson(needs.filter.outputs.packages) }}
+        package: ${{ fromJson(needs.filter.outputs.packages) }}
     steps:
       - uses: actions/checkout@v3
       - name: Install pnpm
@@ -52,7 +52,7 @@ jobs:
     strategy:
       matrix:
         node-version: [18]
-#        package: ${{ fromJson(needs.filter.outputs.packages) }}
+        package: ${{ fromJson(needs.filter.outputs.packages) }}
     env:
       READ_PACKAGE_TOKEN: ${{ secrets.READ_PACKAGE_TOKEN }}
     steps:

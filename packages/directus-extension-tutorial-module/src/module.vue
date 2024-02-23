@@ -25,7 +25,7 @@ const data = {
 		"article": "an",
 		"thingsToDo": [
 			"Create/Modify resources to be verified by moderators",
-			"Enjoy life :)"
+			"Enjoy life :-)"
 		],
 		"faq": {
 			"I can't edit my own resources. Why?": "Is the resource you're trying to access verified by a moderator?<br/><br/>If the answer is yes, then you need to ask a moderator through the Editor's group to unverify the resource before editing it! Or you could submit a report through the frontend (coming soon).",
