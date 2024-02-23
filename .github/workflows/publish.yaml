@@ -9,12 +9,12 @@ jobs:
   filter:
     runs-on: ubuntu-latest
     outputs:
-      packages: ${{ steps.filter.outputs.changes }}
+      packages: ${{ steps.step1.outputs.changes }}
     steps:
       - uses: actions/checkout@v3
       - name: Run filter script
         run: ./.github/generate-filters.sh
-      - id: filter
+      - id: step1
         uses: dorny/paths-filter@v3
         with:
           base: ${{ github.ref }}
@@ -22,12 +22,12 @@ jobs:
 
   lint:
     needs: filter
-    if: ${{ needs.changes.outputs.packages != '' && toJson(fromJson(needs.changes.outputs.packages)) != '[]' }}
+    if: ${{ needs.filter.outputs.packages != '[]' && needs.filter.outputs.packages != '' }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [18]
-        package: ${{ fromJson(needs.changes.outputs.packages) }}
+#        package: ${{ fromJson(needs.filter.outputs.packages) }}
     steps:
       - uses: actions/checkout@v3
       - name: Install pnpm
@@ -47,12 +47,12 @@ jobs:
 
   publish:
     needs: [lint, filter]
-    if: ${{ needs.changes.outputs.packages != '' && toJson(fromJson(needs.changes.outputs.packages)) != '[]' }}
+    if: ${{ needs.filter.outputs.packages != '[]' && needs.filter.outputs.packages != '' }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [18]
-        package: ${{ fromJson(needs.changes.outputs.packages) }}
+#        package: ${{ fromJson(needs.filter.outputs.packages) }}
     env:
       READ_PACKAGE_TOKEN: ${{ secrets.READ_PACKAGE_TOKEN }}
     steps:
