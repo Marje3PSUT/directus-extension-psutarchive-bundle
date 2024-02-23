@@ -71,5 +71,5 @@ jobs:
         run: pnpm i -F=${{ matrix.package }} --config.recursive-install=false  --config.dedupe-peer-dependents=false
       - name: Build extensions
         run: pnpm -F=${{ matrix.package }} run build
-#      - name: Publish packages
-#        run: pnpm publish -F=${{ matrix.package }}
+      - name: Publish packages
+        run: pnpm publish -F=${{ matrix.package }}
