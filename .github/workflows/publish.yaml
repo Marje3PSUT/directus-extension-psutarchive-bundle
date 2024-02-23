@@ -6,17 +6,34 @@ on:
       - main
 
 jobs:
+  filter:
+    runs-on: ubuntu-latest
+    outputs:
+      packages: ${{ steps.filter.outputs.changes }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run filter script
+        run: ./.github/generate-filters.sh
+      - id: filter
+        uses: dorny/paths-filter@v3
+        with:
+          base: ${{ github.ref }}
+          filters: filters.yaml
+
   lint:
+    needs: filter
+    if: ${{ needs.changes.outputs.packages != '' && toJson(fromJson(needs.changes.outputs.packages)) != '[]' }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [18]
+        package: ${{ fromJson(needs.changes.outputs.packages) }}
     steps:
       - uses: actions/checkout@v3
       - name: Install pnpm
-        uses: pnpm/action-setup@v2
+        uses: pnpm/action-setup@v3
         with:
-          version: 8.9.0
+          version: 8.15.3
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
@@ -24,24 +41,26 @@ jobs:
           registry-url: https://npm.pkg.github.com/
           cache: 'pnpm'
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm i --config.recursive-install=false --config.dedupe-peer-dependents=false
       - name: Check eslint
-        run: pnpm eslint .
+        run: pnpm eslint packages/${{ matrix.package }}
 
   publish:
-    needs: lint
+    needs: [lint, filter]
+    if: ${{ needs.changes.outputs.packages != '' && toJson(fromJson(needs.changes.outputs.packages)) != '[]' }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [18]
+        package: ${{ fromJson(needs.changes.outputs.packages) }}
     env:
       READ_PACKAGE_TOKEN: ${{ secrets.READ_PACKAGE_TOKEN }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v2
       - name: Install pnpm
-        uses: pnpm/action-setup@v2
+        uses: pnpm/action-setup@v3
         with:
-          version: 8.9.0
+          version: 8.15.3
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
@@ -49,9 +68,8 @@ jobs:
           registry-url: https://npm.pkg.github.com/
           cache: 'pnpm'
       - name: Install dependancies
-        run: pnpm install
+        run: pnpm i -F=${{ matrix.package }} --config.recursive-install=false  --config.dedupe-peer-dependents=false
       - name: Build extensions
-        run: pnpm --recursive run build
-      - name: Publish packages
-        run: pnpm publish -r
-
+        run: pnpm -F=${{ matrix.package }} run build
+#      - name: Publish packages
+#        run: pnpm publish -F=${{ matrix.package }}
