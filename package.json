@@ -1,5 +1,5 @@
 {
-	"name": "psutarchive-directus-extensions",
+	"name": "@Marje3PSUT/directus-extension-psutarchive-bundle",
 	"version": "1.0.0",
 	"private": true,
 	"type": "module",
@@ -73,7 +73,7 @@
 		"node": ">=18.0.0",
 		"pnpm": "~8.15.3"
 	},
-	"repository": "git@github.com:Marje3PSUT/psutarchive-directus-extensions.git",
+	"repository": "git@github.com:Marje3PSUT/directus-extension-psutarchive-bundle.git",
 	"dependencies": {
 		"@directus/errors": "^0.2.3",
 		"@directus/extensions-sdk": "^10.3.4",
