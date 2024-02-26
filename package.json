@@ -45,6 +45,12 @@
 				"partial": "false",
 				"name": "directus-extension-year-validation",
 				"source": "src/year-validation/index.ts"
+			},
+			{
+				"type": "hook",
+				"partial": "false",
+				"name": "directus-extension-limit-resources",
+				"source": "src/limit-resources/index.ts"
 			}
 		]
 	},
