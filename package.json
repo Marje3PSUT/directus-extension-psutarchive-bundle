@@ -2,8 +2,50 @@
 	"name": "psutarchive-directus-extensions",
 	"version": "1.0.0",
 	"private": true,
+	"type": "module",
+	"directus:extension": {
+		"host": "^10.1.14",
+		"type": "bundle",
+		"path": {
+			"app": "dist/app.mjs",
+			"api": "dist/api.mjs"
+		},
+		"entries": [
+			{
+				"type": "hook",
+				"name": "directus-extension-delete-orphan-entities",
+				"source": "src/delete-orphan-entities/index.ts"
+			},
+			{
+				"type": "hook",
+				"name": "directus-extension-delete-unused-files",
+				"source": "src/delete-unused-files/index.ts"
+			},
+			{
+				"type": "hook",
+				"name": "directus-extension-module-permissions",
+				"source": "src/module-permissions/index.ts"
+			},
+			{
+				"type": "hook",
+				"name": "directus-extension-slug",
+				"source": "src/slug/index.ts"
+			},
+			{
+				"type": "module",
+				"name": "directus-extension-tutorial-module",
+				"source": "src/tutorial-module/index.ts"
+			},
+			{
+				"type": "hook",
+				"name": "directus-extension-year-validation",
+				"source": "src/year-validation/index.ts"
+			}
+		]
+	},
 	"scripts": {
-		"build": "pnpm --recursive run build",
+		"build": "directus-extension build",
+		"dev": "directus-extension build -w --no-minify",
 		"format": "prettier --write .",
 		"lint": "eslint --cache . --fix",
 		"prepare": "husky install"
@@ -23,5 +65,10 @@
 		"node": ">=18.0.0",
 		"pnpm": "~8.15.3"
 	},
-	"repository": "git@github.com:Marje3PSUT/psutarchive-directus-extensions.git"
+	"repository": "git@github.com:Marje3PSUT/psutarchive-directus-extensions.git",
+	"dependencies": {
+		"@directus/errors": "^0.2.3",
+		"@directus/extensions-sdk": "^10.3.4",
+		"@sindresorhus/slugify": "^2.2.1"
+	}
 }
