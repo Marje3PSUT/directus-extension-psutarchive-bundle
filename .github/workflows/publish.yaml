@@ -6,53 +6,11 @@ on:
       - main
 
 jobs:
-  filter:
-    runs-on: ubuntu-latest
-    outputs:
-      packages: ${{ steps.step1.outputs.changes }}
-    steps:
-      - uses: actions/checkout@v3
-      - name: Run filter script
-        run: ./.github/generate-filters.sh
-      - id: step1
-        uses: dorny/paths-filter@v3
-        with:
-          base: ${{ github.ref }}
-          filters: filters.yaml
-
-  lint:
-    needs: filter
-    if: ${{ needs.filter.outputs.packages != '[]' && needs.filter.outputs.packages != '' }}
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [18]
-        package: ${{ fromJson(needs.filter.outputs.packages) }}
-    steps:
-      - uses: actions/checkout@v3
-      - name: Install pnpm
-        uses: pnpm/action-setup@v3
-        with:
-          version: 8.15.3
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-          registry-url: https://npm.pkg.github.com/
-          cache: 'pnpm'
-      - name: Install dependencies
-        run: pnpm i --config.recursive-install=false --config.dedupe-peer-dependents=false
-      - name: Check eslint
-        run: pnpm eslint packages/${{ matrix.package }}
-
   publish:
-    needs: [lint, filter]
-    if: ${{ needs.filter.outputs.packages != '[]' && needs.filter.outputs.packages != '' }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [18]
-        package: ${{ fromJson(needs.filter.outputs.packages) }}
     env:
       READ_PACKAGE_TOKEN: ${{ secrets.READ_PACKAGE_TOKEN }}
     steps:
@@ -68,8 +26,10 @@ jobs:
           registry-url: https://npm.pkg.github.com/
           cache: 'pnpm'
       - name: Install dependancies
-        run: pnpm i -F=${{ matrix.package }} --config.recursive-install=false  --config.dedupe-peer-dependents=false
+        run: pnpm i
+      - name: Link
+        run: pnpm eslint .
       - name: Build extensions
-        run: pnpm -F=${{ matrix.package }} run build
+        run: pnpm build
       - name: Publish packages
-        run: pnpm publish -F=${{ matrix.package }}
+        run: pnpm publish
