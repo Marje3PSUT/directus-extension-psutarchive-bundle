@@ -1,7 +1,6 @@
 {
 	"name": "@Marje3PSUT/directus-extension-psutarchive-bundle",
 	"version": "1.0.0",
-	"private": true,
 	"type": "module",
 	"directus:extension": {
 		"host": "^10.1.14",
