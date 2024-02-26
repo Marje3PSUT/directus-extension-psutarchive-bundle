@@ -1,0 +1,15 @@
+.github
+.husky
+.vscode
+node_modules
+src
+.editorconfig
+.eslintignore
+.eslintrc.cjs
+.lintstagedrc.json
+.prettierignore
+.prettierrc.js
+tsconfig.js
+.gitignore
+pnpm-lock.yaml
+.npmrc
