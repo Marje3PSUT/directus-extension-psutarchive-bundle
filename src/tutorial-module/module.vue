@@ -21,8 +21,8 @@ const data = {
 			"Where should I upload files (not within resources)": "Upload the files outside the 'resource_files' folder"
 		}
 	},
-	editor: {
-		"article": "an",
+	contributer: {
+		"article": "a",
 		"thingsToDo": [
 			"Create/Modify resources to be verified by moderators",
 			"Enjoy life :-)"
