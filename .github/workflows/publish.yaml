@@ -27,6 +27,8 @@ jobs:
           cache: 'pnpm'
       - name: Install dependancies
         run: pnpm i
+      - name: Link
+        run: pnpm eslint .
       - name: Build extensions
         run: pnpm build
       - name: Publish packages
