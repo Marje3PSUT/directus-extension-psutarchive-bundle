@@ -13,21 +13,25 @@
 		"entries": [
 			{
 				"type": "hook",
+				"partial": "false",
 				"name": "directus-extension-delete-orphan-entities",
 				"source": "src/delete-orphan-entities/index.ts"
 			},
 			{
 				"type": "hook",
+				"partial": "false",
 				"name": "directus-extension-delete-unused-files",
 				"source": "src/delete-unused-files/index.ts"
 			},
 			{
 				"type": "hook",
+				"partial": "false",
 				"name": "directus-extension-module-permissions",
 				"source": "src/module-permissions/index.ts"
 			},
 			{
 				"type": "hook",
+				"partial": "false",
 				"name": "directus-extension-slug",
 				"source": "src/slug/index.ts"
 			},
@@ -38,11 +42,15 @@
 			},
 			{
 				"type": "hook",
+				"partial": "false",
 				"name": "directus-extension-year-validation",
 				"source": "src/year-validation/index.ts"
 			}
 		]
 	},
+	"files": [
+		"dist"
+	],
 	"scripts": {
 		"build": "directus-extension build",
 		"dev": "directus-extension build -w --no-minify",
@@ -69,6 +77,9 @@
 	"dependencies": {
 		"@directus/errors": "^0.2.3",
 		"@directus/extensions-sdk": "^10.3.4",
-		"@sindresorhus/slugify": "^2.2.1"
+		"@sindresorhus/slugify": "^2.2.1",
+		"@vueuse/core": "^10.8.0",
+		"@vueuse/integrations": "^10.8.0",
+		"fuse.js": "^7.0.0"
 	}
 }
