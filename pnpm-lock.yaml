@@ -57,6 +57,22 @@ importers:
         specifier: ^5.2.2
         version: 5.2.2
 
+  packages/directus-extension-limit-unverified-resources:
+    dependencies:
+      '@directus/errors':
+        specifier: ^0.2.0
+        version: 0.2.0
+    devDependencies:
+      '@directus/extensions-sdk':
+        specifier: 10.1.14
+        version: 10.1.14(@types/node@20.9.0)
+      '@types/node':
+        specifier: ^20.9.0
+        version: 20.9.0
+      typescript:
+        specifier: ^5.2.2
+        version: 5.2.2
+
   packages/directus-extension-module-permissions:
     devDependencies:
       '@directus/extensions-sdk':
@@ -220,7 +236,6 @@ packages:
     dependencies:
       '@directus/storage': 10.0.7
       ms: 2.1.3
-    dev: true
 
   /@directus/extensions-sdk@10.1.14(@types/node@20.9.0):
     resolution: {integrity: sha512-Ls/fOP5AwmWkNhAlA7gFiBUn5iAVIzrithDXS/beHRJ/B2wv3cjEyY7NJic8M1xYZSCVGDWTakjUE7GUhmXHtw==}
@@ -357,7 +372,6 @@ packages:
 
   /@directus/storage@10.0.7:
     resolution: {integrity: sha512-dS3NjnQGR42XfgdprxMVUnoGO55F2jfVoshXFt7j56TDHirGODdogvypKbGm+1OM3VTD+s84GSXfh7RjtlLJHg==}
-    dev: true
 
   /@directus/types@11.0.1:
     resolution: {integrity: sha512-cs0DsVH3hsFQ5SVbO7acFSNMHzRSWUpVsLQr3gQAMDievRHKqeRwA/6CCnHBPLxfrQ2gS1befPr+jRDyXqKkWw==}
@@ -3194,7 +3208,6 @@ packages:
 
   /ms@2.1.3:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
-    dev: true
 
   /mute-stream@1.0.0:
     resolution: {integrity: sha512-avsJQhyd+680gKXyG/sQc0nXaC6rBkPOfyHYcFb9+hdkqQkR9bdnkJ0AMZhke0oesPqIO+mFFJ+IdBc7mst4IA==}
