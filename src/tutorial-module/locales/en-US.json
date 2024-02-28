@@ -1,0 +1,74 @@
+{
+	"title": "Overview",
+	"pronoun": "You're",
+	"ttd": "Things to do:",
+	"faq": "FAQs (Frequently Asked questions)",
+	"administrator": {
+		"role": "Administrator",
+		"article": "an",
+		"thingsToDo": {
+			"ttd1": "Create/Modify/Delete categories",
+			"ttd2": "Create/Modify/Delete courses",
+			"ttd3": "Modify/Delete resources",
+			"ttd4": "Verify resources",
+			"ttd5": "Manage users",
+			"ttd6": "Modify about pages",
+			"ttd7": "Create/Modify/Delete announcements"
+		},
+		"faq": {
+			"q1": {
+				"q": "Where should I upload files (not within resources)",
+				"a": "Upload the files outside the 'resource_files' folder"
+			}
+		}
+	},
+	"contributer": {
+		"role": "Contributer",
+		"article": "a",
+		"thingsToDo": {
+			"ttd1": "Create/Modify resources to be verified by moderators",
+			"ttd2": "Enjoy life :-)"
+		},
+		"faq": {
+			"q1": {
+				"q": "I can't edit my own resources. Why?",
+				"a": "Is the resource you're trying to edit verified by a moderator? If the answer is yes, then you need to contact a moderator through the marje3 group to unverify the resource before editing it! Or you could submit a report through the frontend (coming soon)."
+			},
+			"q2": {
+				"q": "Why can't I see other unverified resources?",
+				"a": "Conntributers aren't allowed to see other resources because it's the moderator's job to verify that the resources are correct. As an added bonus, if someone uploads something tasteless, we will be the ones to suffer on your behalf ;)"
+			}
+		}
+	},
+	"moderator": {
+		"role": "Moderator",
+		"article": "a",
+		"thingsToDo": {
+			"ttd1": "Create/Modify/Delete courses",
+			"ttd2": "Create/Modify/Delete resources",
+			"ttd3": "Verify resources according to our community guidelines",
+			"ttd4": "Demote users if they violate our community guidelines",
+			"ttd5": "Verify and change the names of new users if necessary"
+		},
+		"faq": {
+			"q1": {
+				"q": "How do I ban/change the name of users?",
+				"a": "Watch this video."
+			}
+		}
+	},
+	"allFaqs": {
+		"q1": {
+			"q": "How do I create resources?",
+			"a": "This quick video should show you the basics."
+		},
+		"q2": {
+			"q": "My files aren't being uploaded. What did I do wrong?",
+			"a": "Make sure you don't press 'Done' when you upload files, even if the bar reaches 100%, otherwise nothing will be uploaded."
+		},
+		"q3": {
+			"q": "How do I change my theme/language in the admin panel?",
+			"a": "This video should show you how."
+		}
+	}
+}
