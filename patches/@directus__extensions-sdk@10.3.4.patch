@@ -1,0 +1,75 @@
+diff --git a/dist/cli/commands/build.js b/dist/cli/commands/build.js
+index 6eabaae51ddc7dd8df75d23c7a04351ae5af7383..dc2c5529b91c8bde6fe54c03f0541c5a1f1535cb 100644
+--- a/dist/cli/commands/build.js
++++ b/dist/cli/commands/build.js
+@@ -11,6 +11,8 @@ import chalk from 'chalk';
+ import fse from 'fs-extra';
+ import ora from 'ora';
+ import path from 'path';
++import { fileURLToPath } from 'url';
++import { pathToRelativeUrl } from '@directus/utils/node';
+ import { rollup, watch as rollupWatch } from 'rollup';
+ import esbuildDefault from 'rollup-plugin-esbuild';
+ import stylesDefault from 'rollup-plugin-styles';
+@@ -258,13 +260,17 @@ async function buildBundleExtension({ entries, outputApp, outputApi, format, wat
+     const plugins = config.plugins ?? [];
+     const entrypointApp = generateBundleEntrypoint('app', entries);
+     const entrypointApi = generateBundleEntrypoint('api', entries);
+-    const rollupOptionsApp = getRollupOptions({
++
++    const appPlugins = (await import(pathToRelativeUrl(path.resolve("app.plugins.cjs"), path.dirname(fileURLToPath(import.meta.url))))).default;
++
++    const rollupOptionsApp = getRollupOptionsPlugins({
+         mode: 'browser',
+         input: { entry: entrypointApp },
+         sourcemap,
+         minify,
+-        plugins,
++        plugins: appPlugins,
+     });
++
+     const rollupOptionsApi = getRollupOptions({
+         mode: 'node',
+         input: { entry: entrypointApi },
+@@ -272,6 +278,7 @@ async function buildBundleExtension({ entries, outputApp, outputApi, format, wat
+         minify,
+         plugins,
+     });
++
+     const rollupOutputOptionsApp = getRollupOutputOptions({ mode: 'browser', output: outputApp, format, sourcemap });
+     const rollupOutputOptionsApi = getRollupOutputOptions({ mode: 'node', output: outputApi, format, sourcemap });
+     const rollupOptionsAll = [
+@@ -376,6 +383,33 @@ function getRollupOptions({ mode, input, sourcemap, minify, plugins, }) {
+         },
+     };
+ }
++function getRollupOptionsPlugins({ mode, input, sourcemap, minify, plugins, }) {
++    return {
++        input: typeof input !== 'string' ? 'entry' : input,
++        external: mode === 'browser' ? APP_SHARED_DEPS : API_SHARED_DEPS,
++        plugins: [
++            typeof input !== 'string' ? virtual(input) : null,
++            ...plugins,
++            styles(),
++            esbuild({ include: /\.tsx?$/, sourceMap: sourcemap }),
++            nodeResolve({ browser: mode === 'browser', preferBuiltins: mode === 'node' }),
++            commonjs({ esmExternals: mode === 'browser', sourceMap: sourcemap }),
++            json(),
++            replace({
++                values: {
++                    'process.env.NODE_ENV': JSON.stringify('production'),
++                },
++                preventAssignment: true,
++            }),
++            
++        ],
++        onwarn(warning, warn) {
++            if (warning.code === 'CIRCULAR_DEPENDENCY' && warning.ids?.every((id) => /\bnode_modules\b/.test(id)))
++                return;
++            warn(warning);
++        },
++    };
++}
+ function getRollupOutputOptions({ mode, output, format, sourcemap, }) {
+     const fileExtension = getFileExt(output);
+     let outputFormat = format;
