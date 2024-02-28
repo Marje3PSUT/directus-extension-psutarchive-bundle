@@ -1,120 +1,90 @@
-<script setup>
-//import { defineComponent } from 'vue';
-import { ref, onMounted } from "vue";
-import { useFuse } from '@vueuse/integrations/useFuse'
+<script setup lang="ts">
+import { ref, onMounted } from 'vue';
 import { useApi } from '@directus/extensions-sdk';
+import { useI18n } from 'vue-i18n';
+import en from './locales/en-US.json';
+import ar from './locales/ar-SA.json';
 
-const data = {
-	administrator: {
-		"article": "an",
-		"thingsToDo": [
-			"Create/Modify/Delete categories",
-			"Create/Modify/Delete courses",
-			"Modify/Delete resources",
-			"Verify resources",
-			"Manage users",
-			"Modify about pages",
-			"Create/Modify/Delete announcements"
-		],
-		"faq": {
-			"How do I create resources?": "Don't upload resources as an Admin, because that will mess with the upload script",
-			"Where should I upload files (not within resources)": "Upload the files outside the 'resource_files' folder"
-		}
-	},
-	contributer: {
-		"article": "a",
-		"thingsToDo": [
-			"Create/Modify resources to be verified by moderators",
-			"Enjoy life :-)"
-		],
-		"faq": {
-			"I can't edit my own resources. Why?": "Is the resource you're trying to access verified by a moderator?<br/><br/>If the answer is yes, then you need to ask a moderator through the Editor's group to unverify the resource before editing it! Or you could submit a report through the frontend (coming soon).",
-			"Why can't I see other unverified resources?": "Editors aren't allowed to see other resources because it's the moderator's job to verify that the resources are correct.<br/><br/>As an added bonus, if someone uploads something disgusting or traumatic, we will be the ones to suffer on your behalf ;)",
-			"Why can't I change my own name?": "It is an necessary precaution. If you want to change it please contact a moderator through the Editor's group."
-		}
-	},
-	moderator: {
-		"article": "a",
-		"thingsToDo": [
-			"Create/Modify/Delete courses",
-			"Create/Modify/Delete resources",
-			"Verify resources according to our community guidelines",
-			"Demote users if they violate our community guidelines",
-			"Verify and change the names of new users if necessary"
-		],
-		"faq": {
-			"How do I ban/change the name of users?": "Watch this video. <div class=\"content-container\"><iframe class=\"video\" src=\"https://www.youtube.com/embed/eaof76j9wNA?cc_load_policy=1\" title=\"Manage users\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe></div>The captions if you want more detailed steps."
-		}
-	},
-	all: {
-		"How do I create resources?": "This quick video should show you the basics.<br/><div class=\"content-container\"><iframe class=\"video\" src=\"https://www.youtube.com/embed/F3KdRtR8guA?cc_load_policy=1\" title=\"Creating a resource\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe></div>Make sure to turn on captions!",
-		"My files aren't being uploaded. What did I do wrong?": "Make sure you don't press 'Done' when you upload files, even if the bar reaches 100%.<br/>Otherwise, nothing will be uploaded.\n <div class=\"content-container\"><img class= \"img-tut\" src=\"https://i.imgur.com/yBgS2GD.png\" /></div>",
-		"How do I change my theme/language in the admin panel?": "This video should show you how. <div class=\"content-container\"><iframe class=\"video\" src=\"https://www.youtube.com/embed/vVhH5j8R9UA?cc_load_policy=1\" title=\"Change Theme/Language\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe></div>Make sure to turn on captions if you want the steps in!"
-	}
+interface faq {
+	q: string,
+	a: string,
+	pic?: string,
+	vid?: string
 }
 
-const api = useApi()
-const role = ref('')
-const thingsToDo = ref([])
-const faq = ref({})
-const faqFiltered = ref({})
-const article = ref('')
-const activeAccordion = ref(-1)
+const api = useApi();
+const role = ref<keyof typeof roles>('contributer');
+const activeAccordion = ref(-1);
 
-onMounted(async () => {
-	const userResponse = await api.get('/users/me')
-	const roleId = userResponse.data.data.role
-	const roleResponse = await api.get(`/roles/${roleId}`)
-	role.value = roleResponse.data.data.name
-
-	const allFaqs = data['all']
-	const roleFile = data[role.value.toLowerCase()]
-
-	thingsToDo.value = roleFile.thingsToDo
-	article.value = roleFile.article
-	faq.value = { ...allFaqs, ...roleFile.faq }
-	onSearch()
+const { t } = useI18n({
+	messages: {
+		en,
+		ar,
+	},
 });
 
-const onSearch = (event) => {
+const roles = {
+	administrator: {
+		todo: [
+			t('administrator.thingsToDo.ttd1'),
+			t('administrator.thingsToDo.ttd2'),
+			t('administrator.thingsToDo.ttd3'),
+			t('administrator.thingsToDo.ttd4'),
+			t('administrator.thingsToDo.ttd5'),
+			t('administrator.thingsToDo.ttd6'),
+			t('administrator.thingsToDo.ttd7'),
+		],
+		questions: [{ q: t('administrator.faq.q1.q'), a: t('administrator.faq.q1.a') }],
+	},
+	contributer: {
+		todo: [t('contributer.thingsToDo.ttd1'), t('contributer.thingsToDo.ttd2')],
+		questions: [
+			{ q: t('contributer.faq.q1.q'), a: t('contributer.faq.q1.a') },
+			{ q: t('contributer.faq.q2.q'), a: t('contributer.faq.q2.a') }
+		],
+	},
+	moderator: {
+		todo: [
+			t('moderator.thingsToDo.ttd1'),
+			t('moderator.thingsToDo.ttd2'),
+			t('moderator.thingsToDo.ttd3'),
+			t('moderator.thingsToDo.ttd4'),
+			t('moderator.thingsToDo.ttd5'),
+		],
+		questions: [{ q: t('moderator.faq.q1.q'), a: t('moderator.faq.q1.a'), vid: '' }],
+	},
+};
 
-	if (event?.target?.value && event.target.value !== '') {
-		const { results } = useFuse(event?.target?.value, Object.keys(faq.value))
-		const searchArray = results.value.map(result => result.item)
-		const searchResult = {}
-
-		Object.keys(faq.value).forEach((question) => {
-			if (searchArray.includes(question)) {
-				searchResult[question] = faq.value[question]
-			}
-		})
-
-		faqFiltered.value = searchResult
-	}
-	else {
-		faqFiltered.value = faq.value
-	}
-}
+const allFaqs = [
+	{ q: t('allFaqs.q1.q'), a: t('allFaqs.q1.a'), vid: '' },
+	{ q: t('allFaqs.q2.q'), a: t('allFaqs.q2.a'), pic: 'https://i.imgur.com/yBgS2GD.png' },
+	{ q: t('allFaqs.q3.q'), a: t('allFaqs.q3.a'), vid: 'https://www.youtube.com/embed/wam1x1yjXms' },
+];
 
 const toggleItem = (index) => {
 	if (activeAccordion.value === index) {
-		activeAccordion.value = -1
-	}
-	else {
+		activeAccordion.value = -1;
+	} else {
 		activeAccordion.value = index;
 	}
-}
+};
 
+onMounted(async () => {
+	const userResponse = await api.get('/users/me');
+	const roleId = userResponse.data.data.role;
+	const roleResponse = await api.get(`/roles/${roleId}`);
+	role.value = roleResponse.data.data.name.toLowerCase();
+});
 </script>
 
 <template>
-	<private-view title="Overview">
+	<private-view :title="t('title')">
 		<template #navigation>
 			<v-list nav>
-				<v-list-item to="/welcome">
+				<v-list-item>
 					<v-list-item-icon><v-icon name="overview_key" /></v-list-item-icon>
 					<v-list-item-content>
-						<v-text-overflow text="Overview" />
+						<v-text-overflow :text="t('title')" />
 					</v-list-item-content>
 				</v-list-item>
 			</v-list>
@@ -122,29 +92,47 @@ const toggleItem = (index) => {
 		<div class="overview-content">
 			<div class="box">
 				<h2 class="h2-tut">
-					You're {{ article }}
-					<span class="highlight-container"><span class="highlight">
-							{{ role }}!</span></span>
+					{{ t('pronoun') }} {{ t(`${role}.article`) }}
+					<span class="highlight-container">
+						<span class="highlight">{{ t(`${role}.role`) }}!</span>
+					</span>
 				</h2>
-				<h3 class="h3-tut">Things to do:</h3>
+				<h3 class="h3-tut">{{ t('ttd') }}</h3>
 				<ul class="ul-tut">
-					<li v-for="thing in thingsToDo" :key="thing" clas="li-tut">
-						{{ thing }}
+					<li v-for="td in roles[role].todo" :key="td" clas="li-tut">
+						{{ td }}
 					</li>
 				</ul>
 			</div>
-			<h1 class="h1-tut">FAQs (Frequently Asked questions)</h1>
-			<div class="input-container">
-				<input id="search-faq" type="text" @input="onSearch" />
-			</div>
+			<h1 class="h1-tut">{{ t('faq') }}</h1>
 			<div class="faq">
 				<div
-v-for="(item, index) in Object.keys(faqFiltered)" :key="item"
+					v-for="(item, index) in ([...allFaqs, ...roles[role].questions] as faq[])"
+					:key="index"
 					:class="{ active: activeAccordion === index, 'faq-item': true }"
-					@click="async (event) => { await toggleItem(index); event.target.scrollIntoView({ behavior: 'smooth', black: 'end' }) }">
-					<summary class="faq-question">{{ item }}<span class="arrow">►</span></summary>
+					@click="
+						async (event) => {
+							await toggleItem(index);
+							event.target.scrollIntoView({ behavior: 'smooth', black: 'end' });
+						}
+					"
+				>
+					<summary class="faq-question">
+						{{ item.q }}
+						<span class="arrow">►</span>
+					</summary>
 					<div v-if="activeAccordion === index" class="accordion-drawer">
-						<span v-html="faqFiltered[item]" />
+						{{ item.a }}
+						<div v-if="item.vid" class="content-container">
+							<iframe
+								class="video"
+								:src="item.vid + '?cc_load_policy=1&autoplay=1&mute=1&modestbranding=1&rel=0'"
+								frameborder="0"
+								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+								allowfullscreen
+							></iframe>
+						</div>
+						<div v-if="item.pic" class="content-container"><img class="img-tut" :src="item.pic" /></div>
 					</div>
 				</div>
 			</div>
@@ -169,7 +157,6 @@ v-for="(item, index) in Object.keys(faqFiltered)" :key="item"
 	font-weight: 800;
 }
 
-
 .li-tut {
 	padding: 5px 0px 5px 0px;
 }
@@ -191,6 +178,10 @@ v-for="(item, index) in Object.keys(faqFiltered)" :key="item"
 	padding: 0px 30px 0px 30px;
 }
 
+.highlight-container:lang(ar-SA){
+	margin-right: 8px;
+}
+
 .highlight-container,
 .highlight {
 	position: relative;
@@ -202,7 +193,7 @@ v-for="(item, index) in Object.keys(faqFiltered)" :key="item"
 }
 
 .highlight-container:before {
-	content: " ";
+	content: ' ';
 	display: block;
 	height: 90%;
 	width: 100%;
@@ -232,27 +223,31 @@ v-for="(item, index) in Object.keys(faqFiltered)" :key="item"
 	user-select: none;
 }
 
-.faq-item>.faq-question {
+.faq-item > .faq-question {
 	list-style: none;
 }
 
 .faq-question::-webkit-details-marker {
-	display: none
+	display: none;
 }
 
 .arrow {
 	position: relative;
 	float: right;
+	transform: rotate(-90deg)
+}
+
+.arrow:lang(ar-SA) {
+	float: left
 }
 
 .active .arrow {
-	transform: rotate(90deg)
+	transform: rotate(90deg);
 }
 
 .accordion-drawer {
 	padding: 20px 20px 20px 20px;
-	background-color: lightgray;
-	color: black;
+	background-color: rgba(211, 211, 211, 0.15);
 }
 
 .content-container {
@@ -281,5 +276,6 @@ v-for="(item, index) in Object.keys(faqFiltered)" :key="item"
 	}
 }
 
-@media only screen and (max-width: 320px) {}
+@media only screen and (max-width: 320px) {
+}
 </style>
