@@ -1,6 +1,6 @@
 {
 	"name": "@Marje3PSUT/directus-extension-psutarchive-bundle",
-	"version": "1.0.1",
+	"version": "1.0.3",
 	"type": "module",
 	"directus:extension": {
 		"host": "^10.1.14",
@@ -12,25 +12,21 @@
 		"entries": [
 			{
 				"type": "hook",
-				"partial": "false",
 				"name": "directus-extension-delete-orphan-entities",
 				"source": "src/delete-orphan-entities/index.ts"
 			},
 			{
 				"type": "hook",
-				"partial": "false",
 				"name": "directus-extension-delete-unused-files",
 				"source": "src/delete-unused-files/index.ts"
 			},
 			{
 				"type": "hook",
-				"partial": "false",
 				"name": "directus-extension-module-permissions",
 				"source": "src/module-permissions/index.ts"
 			},
 			{
 				"type": "hook",
-				"partial": "false",
 				"name": "directus-extension-slug",
 				"source": "src/slug/index.ts"
 			},
@@ -41,13 +37,11 @@
 			},
 			{
 				"type": "hook",
-				"partial": "false",
 				"name": "directus-extension-year-validation",
 				"source": "src/year-validation/index.ts"
 			},
 			{
 				"type": "hook",
-				"partial": "false",
 				"name": "directus-extension-limit-resources",
 				"source": "src/limit-resources/index.ts"
 			}
