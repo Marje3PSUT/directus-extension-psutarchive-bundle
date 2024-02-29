@@ -1,3 +1,9 @@
+// Module permissions
+//
+// This hook ensures that only the admin will be able to see the
+// files module.
+//
+
 import { defineHook } from '@directus/extensions-sdk';
 
 export default defineHook(({ filter }) => {

@@ -6,10 +6,10 @@ import en from './locales/en-US.json';
 import ar from './locales/ar-SA.json';
 
 interface faq {
-	q: string,
-	a: string,
-	pic?: string,
-	vid?: string
+	q: string;
+	a: string;
+	pic?: string;
+	vid?: string;
 }
 
 const api = useApi();
@@ -40,7 +40,7 @@ const roles = {
 		todo: [t('contributer.thingsToDo.ttd1'), t('contributer.thingsToDo.ttd2')],
 		questions: [
 			{ q: t('contributer.faq.q1.q'), a: t('contributer.faq.q1.a') },
-			{ q: t('contributer.faq.q2.q'), a: t('contributer.faq.q2.a') }
+			{ q: t('contributer.faq.q2.q'), a: t('contributer.faq.q2.a') },
 		],
 	},
 	moderator: {
@@ -178,7 +178,7 @@ onMounted(async () => {
 	padding: 0px 30px 0px 30px;
 }
 
-.highlight-container:lang(ar-SA){
+.highlight-container:lang(ar-SA) {
 	margin-right: 8px;
 }
 
@@ -234,11 +234,11 @@ onMounted(async () => {
 .arrow {
 	position: relative;
 	float: right;
-	transform: rotate(-90deg)
+	transform: rotate(-90deg);
 }
 
 .arrow:lang(ar-SA) {
-	float: left
+	float: left;
 }
 
 .active .arrow {

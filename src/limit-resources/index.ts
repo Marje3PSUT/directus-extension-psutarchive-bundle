@@ -1,3 +1,10 @@
+// Limit resources
+//
+// This hook checks if the user has 10 or more unverified resources
+// upon creating a resource. If they do, then an descriptive error will
+// show up for them.
+//
+
 import { defineHook } from '@directus/extensions-sdk';
 import { createError } from '@directus/errors';
 
@@ -12,23 +19,24 @@ const ResourceLimitError = createError(
 );
 
 export default defineHook(({ filter }, { services, database, getSchema, logger }) => {
+	const { ItemsService } = services;
+
 	filter('resource.items.create', async (items: any, meta, { accountability }) => {
-		const { ItemsService } = services;
-		const schema = await getSchema();
+		if (accountability?.user) {
+			const schema = await getSchema();
 
-		const ResourceItemService = new ItemsService('resource', { database: database, schema: schema });
+			const resourceItemService = new ItemsService('resource', { database: database, schema: schema });
 
-		const resourceEntities: Entity[] = await ResourceItemService.readByQuery({
-			filter: {
-				user_created: {
-					_eq: accountability?.user,
+			const resourceEntities: Entity[] = await resourceItemService.readByQuery({
+				filter: {
+					user_created: {
+						_eq: accountability.user,
+					},
 				},
-			},
-			limit: -1,
-		});
+				limit: -1,
+			});
 
-		logger.info(accountability?.role);
-
-		if (resourceEntities.length >= 10) throw new ResourceLimitError();
+			if (resourceEntities.length >= 10) throw new ResourceLimitError();
+		}
 	});
 });
