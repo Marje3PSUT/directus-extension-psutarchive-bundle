@@ -44,6 +44,11 @@
 				"type": "hook",
 				"name": "directus-extension-limit-resources",
 				"source": "src/limit-resources/index.ts"
+			},
+			{
+				"type": "hook",
+				"name": "directus-extension-prevent-duplicate-exams",
+				"source": "src/prevent-duplicate-exams/index.ts"
 			}
 		]
 	},
@@ -59,6 +64,7 @@
 	},
 	"devDependencies": {
 		"@intlify/unplugin-vue-i18n": "^2.0.0",
+		"@types/lodash": "^4.14.202",
 		"@typescript-eslint/eslint-plugin": "6.7.3",
 		"@typescript-eslint/parser": "6.7.3",
 		"@vitejs/plugin-vue": "^5.0.4",
@@ -81,9 +87,7 @@
 		"@directus/errors": "0.2.3",
 		"@directus/extensions-sdk": "10.3.4",
 		"@sindresorhus/slugify": "^2.2.1",
-		"@vueuse/core": "10.8.0",
-		"@vueuse/integrations": "^10.8.0",
-		"fuse.js": "^7.0.0"
+		"lodash": "^4.17.21"
 	},
 	"pnpm": {
 		"patchedDependencies": {
