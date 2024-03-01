@@ -49,6 +49,11 @@
 				"type": "hook",
 				"name": "directus-extension-prevent-duplicate-exams",
 				"source": "src/prevent-duplicate-exams/index.ts"
+			},
+			{
+				"type": "hook",
+				"name": "directus-extension-limit-total-upload",
+				"source": "src/limit-total-upload/index.ts"
 			}
 		]
 	},
