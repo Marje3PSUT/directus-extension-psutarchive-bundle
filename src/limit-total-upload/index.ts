@@ -6,22 +6,22 @@
 //
 
 import { defineHook } from '@directus/extensions-sdk';
-import { createError } from '@directus/errors';
+//import { createError } from '@directus/errors';
 
 import { CONTRIBUTOR_ROLE_NAME, MAX_UPLOAD_COUNT_DAY, MAX_UPLOAD_SIZE_DAY } from '../utils/constants';
-
+/*
 const maxUploadError = createError(
 	'MAX_UPLOAD_ERROR',
 	"You've reached your maximum quota of uploaded files for the day! Please try again tomorrow.",
 	500
 );
-
+*/
 export default defineHook(({ action, filter }, { services }) => {
 	const { ItemsService, FilesService } = services;
 
 	/* Directus doesn't allow for the creation of resources with null/empty
 	// files entries (as a result form the files.upload action handler
-	// deleting them), so these functions are redundant for now.
+	// deleting them), so these hooks are redundant for now.
 
 	const resourceFilterHandler = async (payload: any, meta, { schema, database, accountability }) => {
 		if (!(payload?.files?.create.length > 0)) return;
