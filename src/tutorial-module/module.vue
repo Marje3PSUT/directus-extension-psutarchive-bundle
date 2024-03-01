@@ -13,7 +13,7 @@ interface faq {
 }
 
 const api = useApi();
-const role = ref<keyof typeof roles>('contributer');
+const role = ref<keyof typeof roles>('contributor');
 const activeAccordion = ref(-1);
 
 const { t } = useI18n({
@@ -36,11 +36,11 @@ const roles = {
 		],
 		questions: [{ q: t('administrator.faq.q1.q'), a: t('administrator.faq.q1.a') }],
 	},
-	contributer: {
-		todo: [t('contributer.thingsToDo.ttd1'), t('contributer.thingsToDo.ttd2')],
+	contributor: {
+		todo: [t('contributor.thingsToDo.ttd1'), t('contributor.thingsToDo.ttd2')],
 		questions: [
-			{ q: t('contributer.faq.q1.q'), a: t('contributer.faq.q1.a') },
-			{ q: t('contributer.faq.q2.q'), a: t('contributer.faq.q2.a') },
+			{ q: t('contributor.faq.q1.q'), a: t('contributor.faq.q1.a') },
+			{ q: t('contributor.faq.q2.q'), a: t('contributor.faq.q2.a') },
 		],
 	},
 	moderator: {
@@ -59,9 +59,11 @@ const allFaqs = [
 	{ q: t('allFaqs.q1.q'), a: t('allFaqs.q1.a'), vid: '' },
 	{ q: t('allFaqs.q2.q'), a: t('allFaqs.q2.a'), pic: 'https://i.imgur.com/yBgS2GD.png' },
 	{ q: t('allFaqs.q3.q'), a: t('allFaqs.q3.a'), vid: 'https://www.youtube.com/embed/wam1x1yjXms' },
+	{ q: t('allFaqs.q4.q'), a: t('allFaqs.q4.a'), pic: 'https://i.imgur.com/4TXhmey.png' },
+	{ q: t('allFaqs.q5.q'), a: t('allFaqs.q5.a'), pic: 'https://i.imgur.com/y8aBJgK.png' },
 ];
 
-const toggleItem = (index) => {
+const toggleItem = (index: number) => {
 	if (activeAccordion.value === index) {
 		activeAccordion.value = -1;
 	} else {

@@ -1,4 +1,4 @@
-import { VALID_EXAM_TYPES } from './constants';
+import { VALID_EXAM_TYPES } from '../utils/constants';
 
 // Query that is used to find conflicts
 export default (payload: any) => ({

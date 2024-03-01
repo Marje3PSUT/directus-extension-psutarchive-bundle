@@ -7,6 +7,7 @@
 
 import { defineHook } from '@directus/extensions-sdk';
 import { createError } from '@directus/errors';
+import { MAX_UNVERIFIED_RESOURCE_COUNT } from '../utils/constants';
 
 interface Entity {
 	id: number;
@@ -14,11 +15,11 @@ interface Entity {
 
 const ResourceLimitError = createError(
 	'RESOURCE_LIMIT_ERROR',
-	"You can't submit resources if you have 10 or more unverified resources pending.",
+	`You can't submit resources if you have ${MAX_UNVERIFIED_RESOURCE_COUNT} or more unverified resources pending.`,
 	500
 );
 
-export default defineHook(({ filter }, { services, database, getSchema, logger }) => {
+export default defineHook(({ filter }, { services, database, getSchema }) => {
 	const { ItemsService } = services;
 
 	filter('resource.items.create', async (items: any, meta, { accountability }) => {
@@ -36,7 +37,7 @@ export default defineHook(({ filter }, { services, database, getSchema, logger }
 				limit: -1,
 			});
 
-			if (resourceEntities.length >= 10) throw new ResourceLimitError();
+			if (resourceEntities.length >= MAX_UNVERIFIED_RESOURCE_COUNT) throw new ResourceLimitError();
 		}
 	});
 });
