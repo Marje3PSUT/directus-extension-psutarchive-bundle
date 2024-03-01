@@ -1,7 +1,7 @@
 // Limit resources
 //
 // This hook checks if the user has 10 or more unverified resources
-// upon creating a resource. If they do, then an descriptive error will
+// upon creating a resource. If they do, then a descriptive error will
 // show up for them.
 //
 

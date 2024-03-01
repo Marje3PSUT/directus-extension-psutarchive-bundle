@@ -1,7 +1,7 @@
 // Delete Orhpan Entities
 //
 // This hooks deletes all orphan entities in O2O relationships (Deletes files created directly through the collection which
-// isn't intended) and M2M collections (for the jackasses that create random entities in the junction table).
+// isn't intended) and M2M collections (for the jackasses who create random entities in the junction table).
 //
 // This script runs everyday at 3AM.
 //
