@@ -59,9 +59,11 @@ const allFaqs = [
 	{ q: t('allFaqs.q1.q'), a: t('allFaqs.q1.a'), vid: '' },
 	{ q: t('allFaqs.q2.q'), a: t('allFaqs.q2.a'), pic: 'https://i.imgur.com/yBgS2GD.png' },
 	{ q: t('allFaqs.q3.q'), a: t('allFaqs.q3.a'), vid: 'https://www.youtube.com/embed/wam1x1yjXms' },
+	{ q: t('allFaqs.q4.q'), a: t('allFaqs.q4.a'), pic: 'https://i.imgur.com/4TXhmey.png' },
+	{ q: t('allFaqs.q5.q'), a: t('allFaqs.q5.a'), pic: 'https://i.imgur.com/y8aBJgK.png' },
 ];
 
-const toggleItem = (index) => {
+const toggleItem = (index: number) => {
 	if (activeAccordion.value === index) {
 		activeAccordion.value = -1;
 	} else {

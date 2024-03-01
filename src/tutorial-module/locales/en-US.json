@@ -69,6 +69,14 @@
 		"q3": {
 			"q": "How do I change my theme/language in the admin panel?",
 			"a": "This video should show you how."
+		},
+		"q4": {
+			"q": "Why does it show a folder icon when I try to upload files?",
+			"a": "This means that you've reached your limit for the number/total size of files uploaded for today. This is a necessary precaution."
+		},
+		"q5": {
+			"q": "Why can't I select the note/exam type?",
+			"a": "You need to click the deselect button as shown in the picture below."
 		}
 	}
 }
