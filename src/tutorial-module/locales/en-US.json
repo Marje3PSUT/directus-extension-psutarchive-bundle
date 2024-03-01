@@ -22,8 +22,8 @@
 			}
 		}
 	},
-	"contributer": {
-		"role": "Contributer",
+	"contributor": {
+		"role": "Contributor",
 		"article": "a",
 		"thingsToDo": {
 			"ttd1": "Create/Modify resources to be verified by moderators",

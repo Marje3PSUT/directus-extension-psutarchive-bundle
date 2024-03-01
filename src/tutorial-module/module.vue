@@ -13,7 +13,7 @@ interface faq {
 }
 
 const api = useApi();
-const role = ref<keyof typeof roles>('contributer');
+const role = ref<keyof typeof roles>('contributor');
 const activeAccordion = ref(-1);
 
 const { t } = useI18n({
@@ -36,11 +36,11 @@ const roles = {
 		],
 		questions: [{ q: t('administrator.faq.q1.q'), a: t('administrator.faq.q1.a') }],
 	},
-	contributer: {
-		todo: [t('contributer.thingsToDo.ttd1'), t('contributer.thingsToDo.ttd2')],
+	contributor: {
+		todo: [t('contributor.thingsToDo.ttd1'), t('contributor.thingsToDo.ttd2')],
 		questions: [
-			{ q: t('contributer.faq.q1.q'), a: t('contributer.faq.q1.a') },
-			{ q: t('contributer.faq.q2.q'), a: t('contributer.faq.q2.a') },
+			{ q: t('contributor.faq.q1.q'), a: t('contributor.faq.q1.a') },
+			{ q: t('contributor.faq.q2.q'), a: t('contributor.faq.q2.a') },
 		],
 	},
 	moderator: {
