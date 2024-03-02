@@ -1,7 +1,7 @@
 // Limit resources
 //
 // This hook checks if the user has 10 or more unverified resources
-// upon creating a resource. If they do, then an descriptive error will
+// upon creating a resource. If they do, then a descriptive error will
 // show up for them.
 //
 
@@ -29,12 +29,16 @@ export default defineHook(({ filter }, { services, database, getSchema }) => {
 			const resourceItemService = new ItemsService('resource', { database: database, schema: schema });
 
 			const resourceEntities: Entity[] = await resourceItemService.readByQuery({
+				fields: ['id'],
 				filter: {
 					user_created: {
 						_eq: accountability.user,
 					},
+					status: {
+						_eq: 'verified',
+					},
 				},
-				limit: -1,
+				limit: MAX_UNVERIFIED_RESOURCE_COUNT,
 			});
 
 			if (resourceEntities.length >= MAX_UNVERIFIED_RESOURCE_COUNT) throw new ResourceLimitError();
