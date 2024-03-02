@@ -29,14 +29,14 @@ export default defineHook(({ filter }, { services, database, getSchema }) => {
 			const resourceItemService = new ItemsService('resource', { database: database, schema: schema });
 
 			const resourceEntities: Entity[] = await resourceItemService.readByQuery({
-			fields: ['id'],	
-   filter: {
+				fields: ['id'],
+				filter: {
 					user_created: {
 						_eq: accountability.user,
 					},
-     status:{
-       _eq: 'verified',
-     }
+					status: {
+						_eq: 'verified',
+					},
 				},
 				limit: MAX_UNVERIFIED_RESOURCE_COUNT,
 			});
