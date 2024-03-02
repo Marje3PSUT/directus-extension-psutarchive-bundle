@@ -29,12 +29,16 @@ export default defineHook(({ filter }, { services, database, getSchema }) => {
 			const resourceItemService = new ItemsService('resource', { database: database, schema: schema });
 
 			const resourceEntities: Entity[] = await resourceItemService.readByQuery({
-				filter: {
+			fields: ['id'],	
+   filter: {
 					user_created: {
 						_eq: accountability.user,
 					},
+     status:{
+       _eq: 'verified',
+     }
 				},
-				limit: -1,
+				limit: MAX_UNVERIFIED_RESOURCE_COUNT,
 			});
 
 			if (resourceEntities.length >= MAX_UNVERIFIED_RESOURCE_COUNT) throw new ResourceLimitError();
