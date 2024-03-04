@@ -54,6 +54,11 @@
 				"type": "hook",
 				"name": "directus-extension-limit-total-upload",
 				"source": "src/limit-total-upload/index.ts"
+			},
+			{
+				"type": "hook",
+				"name": "directus-extension-show-note-data",
+				"source": "src/show-note-data/index.ts"
 			}
 		]
 	},
