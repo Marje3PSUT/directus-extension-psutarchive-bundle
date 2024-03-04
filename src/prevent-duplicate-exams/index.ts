@@ -41,9 +41,12 @@ export default defineHook(({ filter }, { services, database, getSchema }) => {
 
 		const mergedResource = _.merge(oldResource, payload);
 
-		if (mergedResource.type != 'exam') return;
-
-		if (!VALID_EXAM_TYPES.includes(mergedResource?.exam_data.type)) return;
+		if (
+			mergedResource.type != 'exam' ||
+			!VALID_EXAM_TYPES.includes(mergedResource?.exam_data.type) ||
+			!mergedResource.semester
+		)
+			return;
 
 		const conflictingResources = await resourceItemService.readByQuery(
 			_.merge(conflictQuery(mergedResource), { filter: { id: { _neq: meta.keys[0] } } })

@@ -9,7 +9,7 @@ export default (payload: any) => ({
 		},
 		semester: {
 			_and: {
-				_eq: payload.semester[0].toUpperCase() + payload.semester.slice(1),
+				_eq: payload.semester.toUpperCase() + payload.semester.slice(1),
 				_nnull: true,
 			},
 		},
