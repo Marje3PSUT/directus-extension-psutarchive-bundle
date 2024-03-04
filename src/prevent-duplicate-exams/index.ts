@@ -14,7 +14,6 @@ import _ from 'lodash';
 
 import { createResourceConflictError, createResourceManipulationError } from './errors';
 import conflictQuery from './query';
-import { VALID_EXAM_TYPES } from '../utils/constants';
 
 export default defineHook(({ filter }, { services, database, getSchema }) => {
 	const { ItemsService } = services;
@@ -41,12 +40,9 @@ export default defineHook(({ filter }, { services, database, getSchema }) => {
 
 		const mergedResource = _.merge(oldResource, payload);
 
-		if (
-			mergedResource.type != 'exam' ||
-			!VALID_EXAM_TYPES.includes(mergedResource?.exam_data.type) ||
-			!mergedResource.semester
-		)
-			return;
+		if (mergedResource.type != 'exam') return;
+
+		//console.dir(_.merge(conflictQuery(mergedResource), { filter: { id: { _neq: meta.keys[0] } } }), { depth: null });
 
 		const conflictingResources = await resourceItemService.readByQuery(
 			_.merge(conflictQuery(mergedResource), { filter: { id: { _neq: meta.keys[0] } } })
@@ -61,6 +57,8 @@ export default defineHook(({ filter }, { services, database, getSchema }) => {
 		const resourceItemService = new ItemsService('resource', { database: database, schema: schema });
 
 		if (payload.type != 'exam') return;
+
+		//console.dir(conflictQuery(payload), { depth: null });
 
 		const conflictingResources = await resourceItemService.readByQuery(conflictQuery(payload));
 
