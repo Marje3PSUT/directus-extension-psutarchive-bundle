@@ -35,7 +35,7 @@ export default defineHook(({ filter }, { services, database, getSchema }) => {
 						_eq: accountability.user,
 					},
 					status: {
-						_eq: 'verified',
+						_eq: 'unverified',
 					},
 				},
 				limit: MAX_UNVERIFIED_RESOURCE_COUNT,
