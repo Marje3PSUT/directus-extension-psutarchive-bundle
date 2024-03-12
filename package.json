@@ -1,6 +1,6 @@
 {
 	"name": "@Marje3PSUT/directus-extension-psutarchive-bundle",
-	"version": "1.1.4",
+	"version": "1.2.1",
 	"type": "module",
 	"directus:extension": {
 		"host": "^10.1.14",
@@ -54,6 +54,11 @@
 				"type": "hook",
 				"name": "directus-extension-limit-total-upload",
 				"source": "src/limit-total-upload/index.ts"
+			},
+			{
+				"type": "hook",
+				"name": "directus-extension-show-note-data",
+				"source": "src/show-note-data/index.ts"
 			}
 		]
 	},
@@ -64,7 +69,7 @@
 		"build": "directus-extension build",
 		"dev": "directus-extension build -w --no-minify",
 		"format": "prettier --write .",
-		"lint": "eslint --cache . --fix",
+		"lint": "eslint --cache . --fix && pretti",
 		"prepare": "husky install"
 	},
 	"devDependencies": {
@@ -91,6 +96,7 @@
 	"dependencies": {
 		"@directus/errors": "0.2.3",
 		"@directus/extensions-sdk": "10.3.4",
+		"@directus/types": "^11.0.7",
 		"@sindresorhus/slugify": "^2.2.1",
 		"lodash": "^4.17.21"
 	},

@@ -19,6 +19,9 @@ importers:
       '@directus/extensions-sdk':
         specifier: 10.3.4
         version: 10.3.4(patch_hash=pehghwi3ncgtzbfapxt5kmv4fe)(@unhead/vue@1.8.10)(pinia@2.1.7)(typescript@5.2.2)
+      '@directus/types':
+        specifier: ^11.0.7
+        version: 11.0.7(vue@3.4.21)
       '@sindresorhus/slugify':
         specifier: ^2.2.1
         version: 2.2.1
@@ -637,6 +640,32 @@ packages:
       '@directus/schema': 11.0.1
       '@types/geojson': 7946.0.14
       vue: 3.4.19(typescript@5.2.2)
+    transitivePeerDependencies:
+      - better-sqlite3
+      - mysql
+      - mysql2
+      - pg
+      - pg-native
+      - sqlite3
+      - supports-color
+      - tedious
+    dev: false
+
+  /@directus/types@11.0.7(vue@3.4.21):
+    resolution: {integrity: sha512-0E05IVxZyQa+Na705lZx1GfvAur/cDXzJr4CzuoF2MvrMH7v4kxYMvDAplUtlJTH3TFlWw4dBrTDVKrRD/rfjw==}
+    peerDependencies:
+      knex: '3'
+      vue: ^3.4
+    peerDependenciesMeta:
+      knex:
+        optional: true
+      vue:
+        optional: true
+    dependencies:
+      '@directus/constants': 11.0.3
+      '@directus/schema': 11.0.1
+      '@types/geojson': 7946.0.14
+      vue: 3.4.21(typescript@5.2.2)
     transitivePeerDependencies:
       - better-sqlite3
       - mysql
