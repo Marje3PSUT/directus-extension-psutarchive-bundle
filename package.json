@@ -69,7 +69,7 @@
 		"build": "directus-extension build",
 		"dev": "directus-extension build -w --no-minify",
 		"format": "prettier --write .",
-		"lint": "eslint --cache . --fix",
+		"lint": "eslint --cache . --fix && pretti",
 		"prepare": "husky install"
 	},
 	"devDependencies": {
@@ -96,6 +96,7 @@
 	"dependencies": {
 		"@directus/errors": "0.2.3",
 		"@directus/extensions-sdk": "10.3.4",
+		"@directus/types": "^11.0.7",
 		"@sindresorhus/slugify": "^2.2.1",
 		"lodash": "^4.17.21"
 	},
