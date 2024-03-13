@@ -51,14 +51,14 @@ const roles = {
 			t('moderator.thingsToDo.ttd4'),
 			t('moderator.thingsToDo.ttd5'),
 		],
-		questions: [{ q: t('moderator.faq.q1.q'), a: t('moderator.faq.q1.a'), vid: '' }],
+		questions: [{ q: t('moderator.faq.q1.q'), a: t('moderator.faq.q1.a'), vid: 'https://www.youtube.com/embed/1zScKYPJg14' }],
 	},
 };
 
 const allFaqs = [
-	{ q: t('allFaqs.q1.q'), a: t('allFaqs.q1.a'), vid: '' },
+	{ q: t('allFaqs.q1.q'), a: t('allFaqs.q1.a'), vid: 'https://www.youtube.com/embed/yvRKTnvubfk' },
 	{ q: t('allFaqs.q2.q'), a: t('allFaqs.q2.a'), pic: 'https://i.imgur.com/yBgS2GD.png' },
-	{ q: t('allFaqs.q3.q'), a: t('allFaqs.q3.a'), vid: 'https://www.youtube.com/embed/wam1x1yjXms' },
+	{ q: t('allFaqs.q3.q'), a: t('allFaqs.q3.a'), vid: 'https://www.youtube.com/embed/Tdet3mSG9_M' },
 	{ q: t('allFaqs.q4.q'), a: t('allFaqs.q4.a'), pic: 'https://i.imgur.com/4TXhmey.png' },
 	{ q: t('allFaqs.q5.q'), a: t('allFaqs.q5.a'), pic: 'https://i.imgur.com/y8aBJgK.png' },
 ];
