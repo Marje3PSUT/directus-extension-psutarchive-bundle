@@ -1,5 +1,5 @@
 {
-	"name": "@Marje3PSUT/directus-extension-psutarchive-bundle",
+	"name": "directus-extension-psutarchive-bundle",
 	"version": "1.2.4",
 	"type": "module",
 	"directus:extension": {
