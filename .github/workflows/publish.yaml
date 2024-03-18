@@ -11,8 +11,6 @@ jobs:
     strategy:
       matrix:
         node-version: [18]
-    env:
-      READ_PACKAGE_TOKEN: ${{ secrets.READ_PACKAGE_TOKEN }}
     steps:
       - uses: actions/checkout@v2
       - name: Install pnpm
@@ -32,4 +30,7 @@ jobs:
       - name: Build extensions
         run: pnpm build
       - name: Publish packages
-        run: pnpm publish
+        run: pnpm publish --access public --tag latest
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
+
